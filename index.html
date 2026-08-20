@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Porto — Itinerario di viaggio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --blue-deep: #16345E;
+    --blue-mid: #2C5490;
+    --blue-pale: #C9D9E8;
+    --wash: #F1ECDF;
+    --wash-2: #E6DFCE;
+    --terracotta: #A8462C;
+    --gold: #BF9A2E;
+    --ink: #1B1A17;
+    --ink-soft: #55524A;
+    --white: #FFFDF8;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--wash);
+    color:var(--ink);
+    font-family:'Inter', sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  /* ---------- Azulejo tile pattern ---------- */
+  .tile-strip{
+    height:14px;
+    width:100%;
+    background-image: repeating-linear-gradient(45deg, var(--blue-mid) 0 2px, transparent 2px 10px),
+                       repeating-linear-gradient(-45deg, var(--blue-mid) 0 2px, transparent 2px 10px);
+    background-color:var(--blue-pale);
+  }
+
+  /* ---------- Header ---------- */
+  header{
+    position:relative;
+    background:var(--blue-deep);
+    color:var(--white);
+    padding:64px 24px 56px;
+    overflow:hidden;
+    text-align:center;
+  }
+  header::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background-image:
+      radial-gradient(circle at 10% 20%, rgba(255,255,255,0.05) 0, transparent 40%),
+      radial-gradient(circle at 90% 80%, rgba(255,255,255,0.05) 0, transparent 40%);
+    pointer-events:none;
+  }
+  .eyebrow{
+    font-family:'IBM Plex Mono', monospace;
+    letter-spacing:0.18em;
+    text-transform:uppercase;
+    font-size:12px;
+    color:var(--gold);
+    margin-bottom:18px;
+  }
+  h1{
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    font-size:clamp(38px, 7vw, 68px);
+    line-height:1.02;
+    margin:0 0 14px;
+    letter-spacing:-0.01em;
+  }
+  h1 em{
+    font-style:italic;
+    font-weight:400;
+    color:var(--gold);
+  }
+  .subhead{
+    font-size:16px;
+    color:var(--blue-pale);
+    max-width:520px;
+    margin:0 auto;
+    line-height:1.6;
+  }
+  .route-line{
+    margin-top:36px;
+    display:flex;
+    justify-content:center;
+    gap:6px;
+    flex-wrap:wrap;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px;
+    color:var(--blue-pale);
+  }
+  .route-line span.city{color:var(--white); font-weight:600;}
+  .route-line span.sep{color:var(--gold);}
+
+  /* ---------- Day nav ---------- */
+  nav.daynav{
+    position:sticky;
+    top:0;
+    z-index:50;
+    background:var(--white);
+    border-bottom:1px solid var(--wash-2);
+    display:flex;
+    overflow-x:auto;
+    scrollbar-width:none;
+  }
+  nav.daynav::-webkit-scrollbar{display:none;}
+  nav.daynav button{
+    flex:1 1 auto;
+    min-width:150px;
+    padding:16px 12px;
+    background:transparent;
+    border:none;
+    border-bottom:3px solid transparent;
+    cursor:pointer;
+    font-family:'Inter', sans-serif;
+    color:var(--ink-soft);
+    text-align:left;
+    transition:all .18s ease;
+  }
+  nav.daynav button .d-num{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px;
+    color:var(--terracotta);
+    letter-spacing:0.08em;
+  }
+  nav.daynav button .d-date{
+    display:block;
+    font-weight:600;
+    font-size:14px;
+    color:var(--ink);
+    margin-top:2px;
+  }
+  nav.daynav button.active{
+    border-bottom-color:var(--terracotta);
+    background:var(--wash);
+  }
+  nav.daynav button.active .d-date{color:var(--terracotta);}
+
+  /* ---------- Main ---------- */
+  main{
+    max-width:760px;
+    margin:0 auto;
+    padding:48px 20px 100px;
+  }
+  .day-panel{display:none;}
+  .day-panel.active{display:block; animation:fade .35s ease;}
+  @keyframes fade{from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:translateY(0);}}
+
+  .day-title{
+    font-family:'Fraunces', serif;
+    font-size:32px;
+    font-weight:600;
+    margin:0 0 6px;
+    color:var(--blue-deep);
+  }
+  .day-caption{
+    font-size:14px;
+    color:var(--ink-soft);
+    margin-bottom:28px;
+  }
+
+  .meetpoint{
+    background:var(--blue-deep);
+    color:var(--white);
+    border-radius:10px;
+    padding:18px 20px;
+    margin-bottom:28px;
+    display:flex;
+    gap:14px;
+    align-items:flex-start;
+  }
+  .meetpoint .pin{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    color:var(--gold);
+    flex-shrink:0;
+    padding-top:2px;
+  }
+  .meetpoint p{margin:0; font-size:14px; line-height:1.6; color:var(--blue-pale);}
+  .meetpoint p strong{color:var(--white);}
+
+  /* ---------- Timeline ---------- */
+  .timeline{
+    position:relative;
+    padding-left:28px;
+    border-left:2px solid var(--wash-2);
+  }
+  .stop{
+    position:relative;
+    padding-bottom:26px;
+  }
+  .stop:last-child{padding-bottom:0;}
+  .stop::before{
+    content:"";
+    position:absolute;
+    left:-34px;
+    top:5px;
+    width:11px;
+    height:11px;
+    border-radius:50%;
+    background:var(--white);
+    border:2.5px solid var(--terracotta);
+  }
+  .stop.travel::before{
+    background:var(--wash-2);
+    border-color:var(--ink-soft);
+    width:7px;
+    height:7px;
+    left:-32px;
+    top:7px;
+  }
+  .stop.free::before{
+    border-style:dashed;
+  }
+  .stop-time{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px;
+    color:var(--terracotta);
+    font-weight:600;
+    letter-spacing:0.02em;
+  }
+  .stop.travel .stop-time{color:var(--ink-soft); font-weight:400;}
+  .stop-name{
+    font-family:'Fraunces', serif;
+    font-size:19px;
+    font-weight:600;
+    margin:3px 0 4px;
+    color:var(--ink);
+  }
+  .stop.travel .stop-name{
+    font-family:'Inter', sans-serif;
+    font-size:14px;
+    font-weight:500;
+    color:var(--ink-soft);
+    font-style:italic;
+  }
+  .stop-meta{
+    display:flex;
+    gap:14px;
+    flex-wrap:wrap;
+    font-size:13px;
+    color:var(--ink-soft);
+  }
+  .stop-meta .tag{
+    display:inline-flex;
+    align-items:center;
+    gap:5px;
+  }
+  .stop-note{
+    margin-top:8px;
+    font-size:13.5px;
+    color:var(--ink-soft);
+    background:var(--wash);
+    border-left:3px solid var(--gold);
+    padding:9px 12px;
+    border-radius:0 6px 6px 0;
+    line-height:1.55;
+  }
+
+  .callout{
+    margin-top:32px;
+    background:var(--wash-2);
+    border-radius:10px;
+    padding:18px 20px;
+    font-size:13.5px;
+    line-height:1.6;
+    color:var(--ink-soft);
+    border:1px solid #DCD3BC;
+  }
+  .callout strong{color:var(--terracotta); font-family:'Inter',sans-serif;}
+
+  .food-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+    margin-top:10px;
+  }
+  .food-grid div{
+    background:var(--white);
+    border:1px solid var(--wash-2);
+    border-radius:8px;
+    padding:10px 12px;
+    font-size:13px;
+  }
+
+  footer{
+    text-align:center;
+    padding:40px 20px 60px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+  }
+
+  @media (max-width:600px){
+    header{padding:48px 18px 40px;}
+    main{padding:32px 16px 80px;}
+    .meetpoint{flex-direction:column;}
+    .food-grid{grid-template-columns:1fr;}
+  }
+</style>
+</head>
+<body>
+
+<div class="tile-strip"></div>
+
+<header>
+  <div class="eyebrow">30 Set — 3 Ott 2026</div>
+  <h1>Quattro giorni<br><em>a Porto</em></h1>
+  <p class="subhead">Ribeira, Douro, Braga e Guimarães — un itinerario tra pastéis de nata, azulejos e tramonti sul fiume.</p>
+  <div class="route-line">
+    <span class="city">Orio al Serio</span><span class="sep">✈</span><span class="city">Porto</span><span class="sep">→</span><span class="city">Douro</span><span class="sep">→</span><span class="city">Foz</span>
+  </div>
+</header>
+
+<div class="tile-strip"></div>
+
+<nav class="daynav">
+  <button class="active" data-day="1"><span class="d-num">GIORNO 01</span><span class="d-date">Mer 30 Set — Porto centro</span></button>
+  <button data-day="2"><span class="d-num">GIORNO 02</span><span class="d-date">Gio 1 Ott — Minho</span></button>
+  <button data-day="3"><span class="d-num">GIORNO 03</span><span class="d-date">Ven 2 Ott — Douro</span></button>
+  <button data-day="4"><span class="d-num">GIORNO 04</span><span class="d-date">Sab 3 Ott — Foz e rientro</span></button>
+</nav>
+
+<main>
+
+  <!-- GIORNO 1 -->
+  <section class="day-panel active" id="day-1">
+    <h2 class="day-title">Arrivo e centro storico</h2>
+    <p class="day-caption">Mercoledì 30 settembre — dall'aeroporto alla Ribeira, con tramonto su Gaia</p>
+
+    <div class="timeline">
+      <div class="stop"><div class="stop-time">6:50 – 8:35</div><div class="stop-name">Volo FR4042 — Orio al Serio → Porto</div></div>
+      <div class="stop travel"><div class="stop-time">8:35 – 9:30</div><div class="stop-name">Sbarco, bagagli, Bolt verso hotel</div></div>
+      <div class="stop"><div class="stop-time">9:30 – 9:45</div><div class="stop-name">Deposito bagagli in hotel</div><div class="stop-meta"><span class="tag">⏱ 10-15 min</span></div></div>
+      <div class="stop travel"><div class="stop-time">9:45 – 10:05</div><div class="stop-name">Bolt verso Rua dos Clérigos</div></div>
+      <div class="stop"><div class="stop-time">10:05 – 10:35</div><div class="stop-name">Manteigaria — colazione</div><div class="stop-meta"><span class="tag">⏱ 25-30 min</span><span class="tag">🥐 pastel de nata</span></div></div>
+      <div class="stop"><div class="stop-time">10:35 – 10:50</div><div class="stop-name">Jardim da Cordoaria</div><div class="stop-meta"><span class="tag">⏱ 15 min</span><span class="tag">🚶 a piedi, 2 min</span></div></div>
+      <div class="stop"><div class="stop-time">11:10 – 11:55</div><div class="stop-name">Sé + Old Bishop Palace tower</div><div class="stop-meta"><span class="tag">⏱ 40-45 min</span><span class="tag">💶 4€ torre</span></div></div>
+      <div class="stop"><div class="stop-time">11:55 – 12:05</div><div class="stop-name">Escadas do Codçal</div><div class="stop-meta"><span class="tag">⏱ 10 min</span><span class="tag">📷 vista Ribeira/Gaia</span></div></div>
+      <div class="stop"><div class="stop-time">12:15 – 13:15</div><div class="stop-name">Pranzo da Casa Guedes</div>
+        <div class="stop-meta"><span class="tag">⏱ 45-60 min</span></div>
+        <div class="stop-note">Punto più imprevedibile della mattinata — coda quasi certa, mettete in conto il buffer.</div>
+      </div>
+      <div class="stop"><div class="stop-time">13:15 – 14:00</div><div class="stop-name">Cais de Ribeira</div><div class="stop-meta"><span class="tag">⏱ 30-40 min</span><span class="tag">passeggiata lungofiume</span></div></div>
+      <div class="stop"><div class="stop-time">14:00 – 14:30</div><div class="stop-name">Mercado Ferreira Borges</div><div class="stop-meta"><span class="tag">⏱ 20-30 min</span><span class="tag">souvenir</span></div></div>
+      <div class="stop"><div class="stop-time">14:30 – 14:50</div><div class="stop-name">Ponte Luís I → Gaia</div><div class="stop-meta"><span class="tag">⏱ 15-20 min</span></div></div>
+      <div class="stop"><div class="stop-time">14:50 – 15:30</div><div class="stop-name">Mercado Beira-Rio</div><div class="stop-meta"><span class="tag">⏱ 30-40 min</span><span class="tag">mercatino Gaia</span></div></div>
+      <div class="stop free"><div class="stop-time">15:30 – 19:15</div><div class="stop-name">Tempo libero</div><div class="stop-note">Margine reale della giornata — cuscinetto se la mattina è slittata.</div></div>
+      <div class="stop"><div class="stop-time">19:15 – 20:00</div><div class="stop-name">Tramonto — Miradouro WOW o Jardim do Morro</div><div class="stop-meta"><span class="tag">⏱ 30-45 min</span></div></div>
+      <div class="stop"><div class="stop-time">20:00 – 21:00</div><div class="stop-name">Cena da Conga</div><div class="stop-meta"><span class="tag">⏱ 45-60 min</span><span class="tag">🥖 bifana</span></div></div>
+    </div>
+  </section>
+
+  <!-- GIORNO 2 -->
+  <section class="day-panel" id="day-2">
+    <h2 class="day-title">Viana do Castelo, Braga, Guimarães</h2>
+    <p class="day-caption">Giovedì 1 ottobre — giornata intera con Buendía Tours</p>
+
+    <div class="meetpoint">
+      <div class="pin">Ritrovo</div>
+      <p><strong>Praça da Batalha 66</strong>, 4000-101 Porto — accanto al monumento a D. Pedro V, di fronte al Teatro Nacional São João. Arrivare 15 minuti prima delle 8:00: la guida non aspetta i ritardatari. Cercare le guide con logo <strong>Buendía Tours</strong>.</p>
+    </div>
+
+    <div class="timeline">
+      <div class="stop"><div class="stop-time">8:00 – 18:30</div><div class="stop-name">Tour Viana do Castelo · Braga · Guimarães</div><div class="stop-meta"><span class="tag">⏱ 10h30</span><span class="tag">🚐 pullman/van del tour</span></div></div>
+      <div class="stop"><div class="stop-time">18:30 – 19:15</div><div class="stop-name">Tramonto a Jardim do Morro</div><div class="stop-meta"><span class="tag">⏱ 30-45 min</span></div></div>
+      <div class="stop"><div class="stop-time">19:15 – 20:00</div><div class="stop-name">Cena da asporto da Gazela</div><div class="stop-meta"><span class="tag">⏱ 45 min</span></div></div>
+    </div>
+
+    <div class="callout"><strong>Nota —</strong> giornata interamente gestita dal tour operator: nessun margine di manovra, ma anche nessuna decisione da prendere sul posto.</div>
+  </section>
+
+  <!-- GIORNO 3 -->
+  <section class="day-panel" id="day-3">
+    <h2 class="day-title">Centro storico e Valle del Douro</h2>
+    <p class="day-caption">Venerdì 2 ottobre — il giorno più fitto dell'itinerario</p>
+
+    <div class="timeline">
+      <div class="stop"><div class="stop-time">9:00 – 9:45</div><div class="stop-name">Livraria Lello</div><div class="stop-meta"><span class="tag">⏱ 30-45 min</span><span class="tag">🎫 prenotata</span></div></div>
+      <div class="stop"><div class="stop-time">10:00 – 10:15</div><div class="stop-name">Capela das Almas</div><div class="stop-meta"><span class="tag">⏱ 10-15 min</span><span class="tag">esterno</span></div></div>
+      <div class="stop"><div class="stop-time">10:30 – 13:00</div><div class="stop-name">Mercado do Bolhão + pranzo + Rua do Almada</div>
+        <div class="stop-meta"><span class="tag">⏱ ~2h30</span></div>
+        <div class="stop-note">Variabile comprimibile: se il pranzo slitta, tagliate Rua do Almada per non rischiare il ritrovo delle 13:30.</div>
+      </div>
+      <div class="stop travel"><div class="stop-time">13:00 – 13:25</div><div class="stop-name">Bolt verso Largo da Lapa</div></div>
+    </div>
+
+    <div class="meetpoint">
+      <div class="pin">Ritrovo</div>
+      <p><strong>Largo da Lapa 1</strong>, 4050-069 Porto — ore 13:30. Cooperativa vinicola Valle del Douro, degustazione con formaggi e salumi (no pranzo) + crociera in barca al tramonto.</p>
+    </div>
+
+    <div class="timeline">
+      <div class="stop"><div class="stop-time">13:30 – 21:30</div><div class="stop-name">Tour Douro — degustazione + crociera</div><div class="stop-meta"><span class="tag">⏱ 8h</span></div></div>
+      <div class="stop"><div class="stop-time">21:30 – 22:15</div><div class="stop-name">Cena da Oficina dos Rissóis</div><div class="stop-meta"><span class="tag">⏱ ~45 min</span><span class="tag">✅ aperto ven. 12–22:30</span></div></div>
+    </div>
+
+    <div class="callout"><strong>Giorno più fragile —</strong> zero margine tra Bolhão e il ritrovo delle 13:30. Nessuna verifica preventiva elimina il rischio: gestione solo sul campo.</div>
+  </section>
+
+  <!-- GIORNO 4 -->
+  <section class="day-panel" id="day-4">
+    <h2 class="day-title">Foz do Douro e rientro</h2>
+    <p class="day-caption">Sabato 3 ottobre — giornata con margine, check-out anticipato</p>
+
+    <div class="timeline">
+      <div class="stop"><div class="stop-time">8:30 – 8:50</div><div class="stop-name">Check-out + deposito bagagli in hotel</div><div class="stop-meta"><span class="tag">⏱ 15-20 min</span></div></div>
+      <div class="stop travel"><div class="stop-time">8:50 – 9:00</div><div class="stop-name">Bolt verso Palácio da Bolsa</div></div>
+      <div class="stop"><div class="stop-time">9:00 – 10:15</div><div class="stop-name">Palácio da Bolsa</div>
+        <div class="stop-meta"><span class="tag">⏱ 60-75 min</span><span class="tag">🎫 biglietto acquistato online</span></div>
+        <div class="stop-note">Slot orario non prenotabile online — arrivo di apertura per iniziare il tour il prima possibile.</div>
+      </div>
+      <div class="stop"><div class="stop-time">10:25 – 10:45</div><div class="stop-name">Escadas dos Guindais</div><div class="stop-meta"><span class="tag">⏱ 15-20 min</span></div></div>
+      <div class="stop"><div class="stop-time">11:00 – 11:30</div><div class="stop-name">Jardins do Palácio de Cristal</div><div class="stop-meta"><span class="tag">⏱ 30 min</span></div></div>
+      <div class="stop travel"><div class="stop-time">11:30 – 11:45</div><div class="stop-name">Bolt/tram verso fermata tram storico 1</div></div>
+      <div class="stop"><div class="stop-time">11:45 – 13:45</div><div class="stop-name">Tram 1 + Foz do Douro + Praia dos Ingleses</div><div class="stop-meta"><span class="tag">⏱ 2h</span><span class="tag">🚋 tram storico</span></div></div>
+      <div class="stop travel"><div class="stop-time">13:45 – 14:10</div><div class="stop-name">Bolt verso hotel — solo ritiro bagagli</div></div>
+      <div class="stop travel"><div class="stop-time">14:10 – 14:40</div><div class="stop-name">Bolt verso aeroporto</div></div>
+      <div class="stop"><div class="stop-time">17:40 – 21:10</div><div class="stop-name">Volo di rientro</div></div>
+    </div>
+
+    <div class="callout"><strong>Margine —</strong> arrivo in aeroporto stimato verso le 15:00, ben oltre le 2 ore raccomandate per un volo Ryanair intra-UE.</div>
+  </section>
+
+  <div class="callout" style="margin-top:40px;">
+    <strong>Dove mangiare —</strong>
+    <div class="food-grid">
+      <div>Manteigaria, Fábrica da Nata, Cremosi — pastel de nata</div>
+      <div>Conga — bifana</div>
+      <div>Casa Guedes — cibo tipico low-cost</div>
+      <div>Pastel de bacalhau</div>
+      <div>Mercado do Bolhão</div>
+      <div>Empanadas Malvón</div>
+      <div>Gazela</div>
+      <div>Oficina dos Rissóis</div>
+      <div>Casa Portuguesa do Pastel de Bacalhau</div>
+      <div>Spesa: Auchan, Pingo Doce</div>
+    </div>
+  </div>
+
+</main>
+
+<div class="tile-strip"></div>
+
+<footer>Porto · Settembre—Ottobre 2026</footer>
+
+<script>
+  const buttons = document.querySelectorAll('.daynav button');
+  const panels = document.querySelectorAll('.day-panel');
+  buttons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      buttons.forEach(b => b.classList.remove('active'));
+      panels.forEach(p => p.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById('day-' + btn.dataset.day).classList.add('active');
+      window.scrollTo({top: document.querySelector('nav.daynav').offsetTop, behavior:'smooth'});
+    });
+  });
+</script>
+
+</body>
+</html>
