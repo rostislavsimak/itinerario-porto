@@ -425,6 +425,27 @@
     padding:10px 12px;
     font-size:13px;
   }
+  .food-grid div.food-go{
+    background:var(--blue-deep);
+    border-color:var(--blue-deep);
+    color:var(--white);
+  }
+  .food-grid a{
+    color:var(--terracotta);
+    text-decoration:none;
+    font-weight:600;
+    border-bottom:1px dotted currentColor;
+  }
+  .food-grid div.food-go a{color:var(--white);}
+  .food-when{
+    display:inline-block;
+    margin-left:4px;
+    font-family:'IBM Plex Mono',monospace;
+    font-size:10.5px;
+    letter-spacing:0.04em;
+    color:var(--gold);
+    white-space:nowrap;
+  }
 
   footer{
     text-align:center;
@@ -474,9 +495,13 @@
     <p class="day-caption">Mercoledì 30 settembre — dall'aeroporto alla Ribeira, con tramonto su Gaia</p>
 
     <div class="timeline">
-      <div class="stop"><div class="stop-time">~4:20</div><div class="stop-name">Ingresso parcheggio BGY — P3 Smart Coperto</div>
+      <div class="stop"><div class="stop-time">~2:45</div><div class="stop-name">Partenza da Legnago</div>
+        <div class="stop-meta"><span class="tag">🚗 ~1h45 (A4)</span></div>
+        <div class="stop-note">Se le previsioni serali segnalano nebbia in pianura, anticipare a ~2:15. Assicurarsi di avere già le carte d'imbarco Ryanair scaricate prima di partire.</div>
+      </div>
+      <div class="stop"><div class="stop-time">~4:40</div><div class="stop-name"><a class="map-link" href="https://www.google.com/maps/search/?api=1&query=BGY%20P3%20Smart&query_place_id=ChIJPZzU0U5QgUcRVZx5yH5fJpU" target="_blank" rel="noopener">Ingresso parcheggio BGY — P3 Smart Coperto</a></div>
         <div class="stop-meta"><span class="tag">🅿️ prenotato</span><span class="tag">🚌 navetta ~20 min</span></div>
-        <div class="stop-note">Al terminal entro le <strong>4:50</strong> (2h prima del volo). L'accesso al parcheggio è consentito dalle 04:00. <button class="park-btn" onclick="document.getElementById('parking-modal').classList.add('open')">📄 Apri biglietto + barcode</button></div>
+        <div class="stop-note">⚠️ <strong>Lavori in corso:</strong> l'ingresso è aperto ma c'è un cantiere pochi metri dopo. L'ingresso è subito dopo il parcheggio di riconsegna auto a noleggio, sulla destra — se vedi mezzi da cantiere non fermarti, prosegui. ⛔ Non usare le corsie TELEPASS. Al terminal entro le <strong>4:50</strong> (2h prima del volo); accesso al parcheggio consentito dalle 04:00. <button class="park-btn" onclick="document.getElementById('parking-modal').classList.add('open')">📄 Apri biglietto + barcode</button></div>
       </div>
       <div class="stop"><div class="stop-time">6:50 – 8:35</div><div class="stop-name">Volo FR4042 — Orio al Serio → Porto</div></div>
       <div class="stop travel"><div class="stop-time">8:35 – 9:30</div><div class="stop-name">Sbarco, bagagli, Bolt verso hotel</div></div>
@@ -585,25 +610,30 @@
       <div class="stop"><div class="stop-time">17:40 – 21:10</div><div class="stop-name">Volo di rientro</div>
         <div class="stop-note">🅿️ Atterro a BGY 21:10. Recupero auto al P3 Smart e <strong>uscita entro le 23:00</strong> (scadenza prenotazione). Margine ~1h50: se il volo ritarda oltre ~40 min si paga la differenza in cassa. <button class="park-btn" onclick="document.getElementById('parking-modal').classList.add('open')">📄 Apri biglietto + barcode</button></div>
       </div>
+      <div class="stop"><div class="stop-time">~23:00</div><div class="stop-name">Arrivo a Legnago</div>
+        <div class="stop-meta"><span class="tag">🚗 ~1h45 (A4)</span></div>
+        <div class="stop-note">Partenza dal parcheggio verso le 21:45-22:00 (dopo sbarco, navetta e recupero auto), arrivo a casa intorno alle 23:00.</div>
+      </div>
     </div>
 
     <div class="callout"><strong>Margine —</strong> arrivo in aeroporto stimato verso le 16:00, oltre le 2 ore raccomandate per un volo Ryanair intra-UE. Se Bolsa e Lello scorrono veloci, tutto il pomeriggio si anticipa e il margine cresce. Se serve comprimere, tagliate prima Guindais/Cristal (di passaggio) e salvate Foz.</div>
   </section>
 
   <div class="callout" style="margin-top:40px;">
-    <strong>Dove mangiare —</strong>
+    <strong>Dove mangiare —</strong> <span style="font-size:12.5px; color:var(--ink-soft);">in evidenza i locali già in programma; gli altri sono opzioni extra.</span>
     <div class="food-grid">
-      <div>Manteigaria, Fábrica da Nata, Cremosi — pastel de nata</div>
-      <div>Conga — bifana</div>
-      <div>Casa Guedes — cibo tipico low-cost</div>
-      <div>Bolhão a Gosto — comida tradicional (pranzo G3)</div>
-      <div>A Capoeira — pesce, Foz (pranzo G4)</div>
-      <div>Mercado do Bolhão</div>
-      <div>Empanadas Malvón</div>
-      <div>Gazela</div>
-      <div>Oficina dos Rissóis</div>
-      <div>Casa Portuguesa do Pastel de Bacalhau</div>
-      <div>Spesa: Auchan, Pingo Doce</div>
+      <div class="food-go"><a href="https://www.google.com/maps/search/?api=1&query=Manteigaria%20Rua%20dos%20Cl%C3%A9rigos%20Porto" target="_blank" rel="noopener">Manteigaria</a> — pastel de nata <span class="food-when">G1 · colazione</span></div>
+      <div class="food-go"><a href="https://www.google.com/maps/search/?api=1&query=Casa%20Guedes%20Porto" target="_blank" rel="noopener">Casa Guedes</a> — cibo tipico low-cost <span class="food-when">G1 · pranzo</span></div>
+      <div class="food-go"><a href="https://www.google.com/maps/search/?api=1&query=Conga%20Porto%20Rua%20do%20Bonjardim" target="_blank" rel="noopener">Conga</a> — bifana <span class="food-when">G1 · cena</span></div>
+      <div class="food-go"><a href="https://www.google.com/maps/search/?api=1&query=Gazela%20Cachorrinhos%20Porto" target="_blank" rel="noopener">Gazela</a> — cachorrinhos <span class="food-when">G2 · cena</span></div>
+      <div class="food-go"><a href="https://www.google.com/maps/search/?api=1&query=Bolh%C3%A3o%20a%20Gosto%20Porto" target="_blank" rel="noopener">Bolhão a Gosto</a> — comida tradicional <span class="food-when">G3 · pranzo</span></div>
+      <div class="food-go"><a href="https://www.google.com/maps/search/?api=1&query=Oficina%20dos%20Riss%C3%B3is%20Porto" target="_blank" rel="noopener">Oficina dos Rissóis</a> — rissóis <span class="food-when">G3 · cena</span></div>
+      <div class="food-go"><a href="https://www.google.com/maps/search/?api=1&query=A%20Capoeira%20Restaurante%20Foz%20Porto" target="_blank" rel="noopener">A Capoeira</a> — pesce, Foz <span class="food-when">G4 · pranzo</span></div>
+      <div><a href="https://www.google.com/maps/search/?api=1&query=F%C3%A1brica%20da%20Nata%20Porto" target="_blank" rel="noopener">Fábrica da Nata</a> — pastel de nata</div>
+      <div><a href="https://www.google.com/maps/search/?api=1&query=Cremosi%20Porto" target="_blank" rel="noopener">Cremosi</a> — pastel de nata</div>
+      <div><a href="https://www.google.com/maps/search/?api=1&query=Empanadas%20Malv%C3%B3n%20Porto" target="_blank" rel="noopener">Empanadas Malvón</a></div>
+      <div><a href="https://www.google.com/maps/search/?api=1&query=Casa%20Portuguesa%20do%20Pastel%20de%20Bacalhau%20Porto" target="_blank" rel="noopener">Casa Portuguesa do Pastel de Bacalhau</a></div>
+      <div><a href="https://www.google.com/maps/search/?api=1&query=Auchan%20Porto" target="_blank" rel="noopener">Auchan</a> · <a href="https://www.google.com/maps/search/?api=1&query=Pingo%20Doce%20Porto" target="_blank" rel="noopener">Pingo Doce</a> — spesa</div>
     </div>
   </div>
 
