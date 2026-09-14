@@ -241,6 +241,25 @@
     color:var(--ink-soft);
     font-style:italic;
   }
+
+  .stop-name a.map-link{
+    color:inherit;
+    text-decoration:none;
+    border-bottom:1.5px dotted var(--terracotta);
+    transition:color .15s ease, border-color .15s ease;
+  }
+  .stop-name a.map-link:hover{
+    color:var(--terracotta);
+    border-bottom-color:var(--terracotta);
+    border-bottom-style:solid;
+  }
+  .stop-name a.map-link::after{
+    content:" ↗";
+    font-size:0.7em;
+    color:var(--ink-soft);
+    vertical-align:super;
+  }
+
   .stop-meta{
     display:flex;
     gap:14px;
@@ -340,26 +359,26 @@
     <div class="timeline">
       <div class="stop"><div class="stop-time">6:50 – 8:35</div><div class="stop-name">Volo FR4042 — Orio al Serio → Porto</div></div>
       <div class="stop travel"><div class="stop-time">8:35 – 9:30</div><div class="stop-name">Sbarco, bagagli, Bolt verso hotel</div></div>
-      <div class="stop"><div class="stop-time">9:30 – 9:45</div><div class="stop-name">Deposito bagagli in hotel</div><div class="stop-meta"><span class="tag">⏱ 10-15 min</span></div></div>
+      <div class="stop"><div class="stop-time">9:30 – 9:45</div><div class="stop-name"><a class="map-link" href="https://www.google.com/maps/search/?api=1&query=B%26B%20Hotel%20Porto%20Centro%20Massarelos" target="_blank" rel="noopener">Deposito bagagli in hotel</a></div><div class="stop-meta"><span class="tag">⏱ 10-15 min</span></div></div>
       <div class="stop travel"><div class="stop-time">9:45 – 10:05</div><div class="stop-name">Bolt verso Rua dos Clérigos</div></div>
-      <div class="stop"><div class="stop-time">10:05 – 10:35</div><div class="stop-name">Manteigaria — colazione</div><div class="stop-meta"><span class="tag">⏱ 25-30 min</span><span class="tag">🥐 pastel de nata</span></div></div>
-      <div class="stop"><div class="stop-time">10:35 – 10:50</div><div class="stop-name">Jardim da Cordoaria</div><div class="stop-meta"><span class="tag">⏱ 15 min</span><span class="tag">🚶 a piedi, 2 min</span></div></div>
-      <div class="stop"><div class="stop-time">11:10 – 11:55</div><div class="stop-name">Sé + Old Bishop Palace tower</div>
+      <div class="stop"><div class="stop-time">10:05 – 10:35</div><div class="stop-name"><a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Manteigaria%20Rua%20dos%20Cl%C3%A9rigos%20Porto" target="_blank" rel="noopener">Manteigaria — colazione</a></div><div class="stop-meta"><span class="tag">⏱ 25-30 min</span><span class="tag">🥐 pastel de nata</span></div></div>
+      <div class="stop"><div class="stop-time">10:35 – 10:50</div><div class="stop-name"><a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Jardim%20da%20Cordoaria%20Porto" target="_blank" rel="noopener">Jardim da Cordoaria</a></div><div class="stop-meta"><span class="tag">⏱ 15 min</span><span class="tag">🚶 a piedi, 2 min</span></div></div>
+      <div class="stop"><div class="stop-time">11:10 – 11:55</div><div class="stop-name"><a class="map-link" href="https://www.google.com/maps/search/?api=1&query=S%C3%A9%20do%20Porto" target="_blank" rel="noopener">Sé + Old Bishop Palace tower</a></div>
         <div class="stop-meta"><span class="tag">⏱ 40-45 min</span><span class="tag">💶 4€ torre</span></div>
         <div class="stop-note">⚠️ La salita alla torre è saltabile: se la mattina è in ritardo, tagliatela. Quel giorno avete già altri tre punti panoramici (Escadas do Codçal, tramonto, vista da Gaia) — la torre è il primo elemento da sacrificare per recuperare 40-45 min.</div>
       </div>
-      <div class="stop"><div class="stop-time">11:55 – 12:05</div><div class="stop-name">Escadas do Codçal</div><div class="stop-meta"><span class="tag">⏱ 10 min</span><span class="tag">📷 vista Ribeira/Gaia</span></div></div>
-      <div class="stop"><div class="stop-time">12:15 – 13:15</div><div class="stop-name">Pranzo da Casa Guedes</div>
+      <div class="stop"><div class="stop-time">11:55 – 12:05</div><div class="stop-name"><a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Escadas%20do%20Code%C3%A7al%20Porto" target="_blank" rel="noopener">Escadas do Codçal</a></div><div class="stop-meta"><span class="tag">⏱ 10 min</span><span class="tag">📷 vista Ribeira/Gaia</span></div></div>
+      <div class="stop"><div class="stop-time">12:15 – 13:15</div><div class="stop-name"><a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Casa%20Guedes%20Porto" target="_blank" rel="noopener">Pranzo da Casa Guedes</a></div>
         <div class="stop-meta"><span class="tag">⏱ 45-60 min</span></div>
         <div class="stop-note">Punto più imprevedibile della mattinata — coda quasi certa, mettete in conto il buffer.</div>
       </div>
-      <div class="stop"><div class="stop-time">13:15 – 14:00</div><div class="stop-name">Cais de Ribeira</div><div class="stop-meta"><span class="tag">⏱ 30-40 min</span><span class="tag">passeggiata lungofiume</span></div></div>
-      <div class="stop"><div class="stop-time">14:00 – 14:30</div><div class="stop-name">Mercado Ferreira Borges</div><div class="stop-meta"><span class="tag">⏱ 20-30 min</span><span class="tag">souvenir</span></div></div>
-      <div class="stop"><div class="stop-time">14:30 – 14:50</div><div class="stop-name">Ponte Luís I → Gaia</div><div class="stop-meta"><span class="tag">⏱ 15-20 min</span></div></div>
-      <div class="stop"><div class="stop-time">14:50 – 15:30</div><div class="stop-name">Mercado Beira-Rio</div><div class="stop-meta"><span class="tag">⏱ 30-40 min</span><span class="tag">mercatino Gaia</span></div></div>
+      <div class="stop"><div class="stop-time">13:15 – 14:00</div><div class="stop-name"><a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Cais%20da%20Ribeira%20Porto" target="_blank" rel="noopener">Cais de Ribeira</a></div><div class="stop-meta"><span class="tag">⏱ 30-40 min</span><span class="tag">passeggiata lungofiume</span></div></div>
+      <div class="stop"><div class="stop-time">14:00 – 14:30</div><div class="stop-name"><a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Mercado%20Ferreira%20Borges%20Porto" target="_blank" rel="noopener">Mercado Ferreira Borges</a></div><div class="stop-meta"><span class="tag">⏱ 20-30 min</span><span class="tag">souvenir</span></div></div>
+      <div class="stop"><div class="stop-time">14:30 – 14:50</div><div class="stop-name"><a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Ponte%20Lu%C3%ADs%20I%20Porto" target="_blank" rel="noopener">Ponte Luís I → Gaia</a></div><div class="stop-meta"><span class="tag">⏱ 15-20 min</span></div></div>
+      <div class="stop"><div class="stop-time">14:50 – 15:30</div><div class="stop-name"><a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Mercado%20Beira-Rio%20Vila%20Nova%20de%20Gaia" target="_blank" rel="noopener">Mercado Beira-Rio</a></div><div class="stop-meta"><span class="tag">⏱ 30-40 min</span><span class="tag">mercatino Gaia</span></div></div>
       <div class="stop free"><div class="stop-time">15:30 – 19:15</div><div class="stop-name">Tempo libero</div><div class="stop-note">Margine reale della giornata — cuscinetto se la mattina è slittata.</div></div>
-      <div class="stop"><div class="stop-time">19:15 – 20:00</div><div class="stop-name">Tramonto — Miradouro WOW o Jardim do Morro</div><div class="stop-meta"><span class="tag">⏱ 30-45 min</span></div></div>
-      <div class="stop"><div class="stop-time">20:00 – 21:00</div><div class="stop-name">Cena da Conga</div><div class="stop-meta"><span class="tag">⏱ 45-60 min</span><span class="tag">🥖 bifana</span></div></div>
+      <div class="stop"><div class="stop-time">19:15 – 20:00</div><div class="stop-name"><a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Jardim%20do%20Morro%20Vila%20Nova%20de%20Gaia" target="_blank" rel="noopener">Tramonto — Miradouro WOW o Jardim do Morro</a></div><div class="stop-meta"><span class="tag">⏱ 30-45 min</span></div></div>
+      <div class="stop"><div class="stop-time">20:00 – 21:00</div><div class="stop-name"><a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Conga%20Porto%20Rua%20do%20Bonjardim" target="_blank" rel="noopener">Cena da Conga</a></div><div class="stop-meta"><span class="tag">⏱ 45-60 min</span><span class="tag">🥖 bifana</span></div></div>
     </div>
   </section>
 
@@ -375,8 +394,8 @@
 
     <div class="timeline">
       <div class="stop"><div class="stop-time">8:00 – 18:30</div><div class="stop-name">Tour Viana do Castelo · Braga · Guimarães</div><div class="stop-meta"><span class="tag">⏱ 10h30</span><span class="tag">🚐 pullman/van del tour</span></div></div>
-      <div class="stop"><div class="stop-time">18:30 – 19:15</div><div class="stop-name">Tramonto a Jardim do Morro</div><div class="stop-meta"><span class="tag">⏱ 30-45 min</span></div></div>
-      <div class="stop"><div class="stop-time">19:15 – 20:00</div><div class="stop-name">Cena da asporto da Gazela</div><div class="stop-meta"><span class="tag">⏱ 45 min</span></div></div>
+      <div class="stop"><div class="stop-time">18:30 – 19:15</div><div class="stop-name"><a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Jardim%20do%20Morro%20Vila%20Nova%20de%20Gaia" target="_blank" rel="noopener">Tramonto a Jardim do Morro</a></div><div class="stop-meta"><span class="tag">⏱ 30-45 min</span></div></div>
+      <div class="stop"><div class="stop-time">19:15 – 20:00</div><div class="stop-name"><a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Gazela%20Cachorrinhos%20Porto" target="_blank" rel="noopener">Cena da asporto da Gazela</a></div><div class="stop-meta"><span class="tag">⏱ 45 min</span></div></div>
     </div>
 
     <div class="callout"><strong>Nota —</strong> giornata interamente gestita dal tour operator: nessun margine di manovra, ma anche nessuna decisione da prendere sul posto.<br><br><strong>Pranzo non incluso e senza sosta dedicata:</strong> va incastrato nel tempo libero. La finestra giusta è la sosta a <strong>Braga</strong> (2h, verso le 11:00-13:00) — la più lunga e nella fascia pranzo. Tenete presente che così parte del "tempo libero" a Braga se ne va per mangiare, riducendo la visita effettiva a ~1h. Colazione da fare prima delle 8:00, vista l'ora del ritrovo.</div>
@@ -390,8 +409,8 @@
     <div class="callout" style="margin-top:0; margin-bottom:28px;"><strong>Lello spostata —</strong> la libreria è chiusa il 2 ottobre per circostanze eccezionali: il biglietto è stato riprogrammato al 3 ottobre (Giorno 4). La mattinata parte quindi con più respiro.</div>
 
     <div class="timeline">
-      <div class="stop"><div class="stop-time">9:30 – 9:45</div><div class="stop-name">Capela das Almas</div><div class="stop-meta"><span class="tag">⏱ 10-15 min</span><span class="tag">esterno</span></div></div>
-      <div class="stop"><div class="stop-time">10:00 – 13:00</div><div class="stop-name">Mercado do Bolhão + pranzo + Rua do Almada</div>
+      <div class="stop"><div class="stop-time">9:30 – 9:45</div><div class="stop-name"><a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Capela%20das%20Almas%20Porto" target="_blank" rel="noopener">Capela das Almas</a></div><div class="stop-meta"><span class="tag">⏱ 10-15 min</span><span class="tag">esterno</span></div></div>
+      <div class="stop"><div class="stop-time">10:00 – 13:00</div><div class="stop-name"><a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Mercado%20do%20Bolh%C3%A3o%20Porto" target="_blank" rel="noopener">Mercado do Bolhão + pranzo + Rua do Almada</a></div>
         <div class="stop-note">🍽️ <strong>Pranzo abbondante obbligatorio:</strong> tra le 13:00 e la cena delle 21:30 mangerete solo la degustazione di salumi/formaggi del tour (no pranzo incluso) — 8 ore di vuoto. Fate un pranzo vero. Consiglio: <strong>Bolhão a Gosto</strong> (comida tradicional, 4,8★, aperto ven. 9-22, a due passi dal mercato) — riso di pesce, polpo, porzioni generose. I banchi dentro il mercato hanno qualità media a prezzo alto: meglio vedere il mercato e mangiare qui fuori.<br><br>Se il pranzo slitta, tagliate Rua do Almada per non rischiare il ritrovo delle 13:30.</div>
       </div>
         <div class="stop-meta"><span class="tag">⏱ ~2h30</span></div>
@@ -406,8 +425,8 @@
     </div>
 
     <div class="timeline">
-      <div class="stop"><div class="stop-time">13:30 – 21:30</div><div class="stop-name">Tour Douro — degustazione + crociera</div><div class="stop-meta"><span class="tag">⏱ 8h</span></div></div>
-      <div class="stop"><div class="stop-time">21:30 – 22:15</div><div class="stop-name">Cena da Oficina dos Rissóis</div><div class="stop-meta"><span class="tag">⏱ ~45 min</span><span class="tag">✅ aperto ven. 12–22:30</span></div></div>
+      <div class="stop"><div class="stop-time">13:30 – 21:30</div><div class="stop-name"><a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Largo%20da%20Lapa%20Porto" target="_blank" rel="noopener">Tour Douro — degustazione + crociera</a></div><div class="stop-meta"><span class="tag">⏱ 8h</span></div></div>
+      <div class="stop"><div class="stop-time">21:30 – 22:15</div><div class="stop-name"><a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Oficina%20dos%20Riss%C3%B3is%20Porto" target="_blank" rel="noopener">Cena da Oficina dos Rissóis</a></div><div class="stop-meta"><span class="tag">⏱ ~45 min</span><span class="tag">✅ aperto ven. 12–22:30</span></div></div>
     </div>
 
     <div class="callout"><strong>Punto teso —</strong> con Lello spostata la mattina ha mezz'ora di margine in più, ma l'incastro tra fine pranzo al Bolhão e il ritrovo delle 13:30 resta il momento da gestire: se il pranzo slitta, tagliate Rua do Almada.</div>
@@ -419,29 +438,29 @@
     <p class="day-caption">Sabato 3 ottobre — giornata con margine, check-out anticipato</p>
 
     <div class="timeline">
-      <div class="stop"><div class="stop-time">8:30 – 8:50</div><div class="stop-name">Check-out + deposito bagagli in hotel</div><div class="stop-meta"><span class="tag">⏱ 15-20 min</span></div></div>
+      <div class="stop"><div class="stop-time">8:30 – 8:50</div><div class="stop-name"><a class="map-link" href="https://www.google.com/maps/search/?api=1&query=B%26B%20Hotel%20Porto%20Centro%20Massarelos" target="_blank" rel="noopener">Check-out + deposito bagagli in hotel</a></div><div class="stop-meta"><span class="tag">⏱ 15-20 min</span></div></div>
       <div class="stop travel"><div class="stop-time">8:50 – 9:00</div><div class="stop-name">Bolt verso Palácio da Bolsa</div></div>
-      <div class="stop"><div class="stop-time">9:00 – 10:15</div><div class="stop-name">Palácio da Bolsa</div>
+      <div class="stop"><div class="stop-time">9:00 – 10:15</div><div class="stop-name"><a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Pal%C3%A1cio%20da%20Bolsa%20Porto" target="_blank" rel="noopener">Palácio da Bolsa</a></div>
         <div class="stop-meta"><span class="tag">⏱ tour 30 min + attesa</span><span class="tag">🎫 ingresso prioritario online</span></div>
         <div class="stop-note">Arrivo all'apertura per minimizzare la coda: la biglietteria può accumulare fino a un'ora di attesa più tardi. Orario e lingua si assegnano lì sul posto (PT/EN/ES/FR, italiano non disponibile); se la priorità è fare in fretta, accettate la prima lingua libera invece di aspettare l'inglese.</div>
       </div>
       <div class="stop free"><div class="stop-time">10:15 – 11:00</div><div class="stop-name">Cuscinetto anti-coda + trasferimento a Rua das Carmelitas</div>
         <div class="stop-note">Margine di sicurezza se Bolsa va lunga. Nello scenario buono siete liberi prima: la zona (Clérigos, Cordoaria, Carmelitas) è tutta da girare a piedi.</div>
       </div>
-      <div class="stop"><div class="stop-time">11:00 – 11:45</div><div class="stop-name">Livraria Lello</div>
+      <div class="stop"><div class="stop-time">11:00 – 11:45</div><div class="stop-name"><a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Livraria%20Lello%20Porto" target="_blank" rel="noopener">Livraria Lello</a></div>
         <div class="stop-meta"><span class="tag">⏱ 30-45 min</span><span class="tag">🎫 riprogrammata al 3 ott</span></div>
         <div class="stop-note">Orario da richiedere via email a Tânia Teles (taniateles@livrarialello.pt) rispondendo alla mail di riprogrammazione. Le 11:00 reggono anche il caso peggiore di coda a Bolsa.</div>
       </div>
-      <div class="stop"><div class="stop-time">11:55 – 12:15</div><div class="stop-name">Escadas dos Guindais</div><div class="stop-meta"><span class="tag">⏱ 15-20 min</span></div></div>
-      <div class="stop"><div class="stop-time">12:15 – 12:45</div><div class="stop-name">Jardins do Palácio de Cristal</div><div class="stop-meta"><span class="tag">⏱ 30 min</span></div></div>
+      <div class="stop"><div class="stop-time">11:55 – 12:15</div><div class="stop-name"><a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Escadas%20dos%20Guindais%20Porto" target="_blank" rel="noopener">Escadas dos Guindais</a></div><div class="stop-meta"><span class="tag">⏱ 15-20 min</span></div></div>
+      <div class="stop"><div class="stop-time">12:15 – 12:45</div><div class="stop-name"><a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Jardins%20do%20Pal%C3%A1cio%20de%20Cristal%20Porto" target="_blank" rel="noopener">Jardins do Palácio de Cristal</a></div><div class="stop-meta"><span class="tag">⏱ 30 min</span></div></div>
       <div class="stop travel"><div class="stop-time">12:45 – 13:00</div><div class="stop-name">Bolt/tram verso fermata tram storico 1</div></div>
-      <div class="stop"><div class="stop-time">13:00 – 14:00</div><div class="stop-name">Pranzo da A Capoeira</div>
+      <div class="stop"><div class="stop-time">13:00 – 14:00</div><div class="stop-name"><a class="map-link" href="https://www.google.com/maps/search/?api=1&query=A%20Capoeira%20Restaurante%20Foz%20Porto" target="_blank" rel="noopener">Pranzo da A Capoeira</a></div>
         <div class="stop-meta"><span class="tag">⏱ ~60 min</span><span class="tag">🐟 pesce fresco, ~25€/persona</span></div>
         <div class="stop-note">Cucina tradizionale a Foz (4,6★), gemma locale sull'Esplanada do Castelo, arrivo col tram storico. Chiude alle 14:30 per la pausa pomeridiana: sedetevi appena arrivati, non dopo la passeggiata. Aperto sabato.</div>
       </div>
-      <div class="stop"><div class="stop-time">14:00 – 14:45</div><div class="stop-name">Foz do Douro + Praia dos Ingleses</div><div class="stop-meta"><span class="tag">⏱ 45 min</span><span class="tag">passeggiata sul lungomare</span></div></div>
+      <div class="stop"><div class="stop-time">14:00 – 14:45</div><div class="stop-name"><a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Praia%20dos%20Ingleses%20Foz%20do%20Douro%20Porto" target="_blank" rel="noopener">Foz do Douro + Praia dos Ingleses</a></div><div class="stop-meta"><span class="tag">⏱ 45 min</span><span class="tag">passeggiata sul lungomare</span></div></div>
       <div class="stop travel"><div class="stop-time">15:00 – 15:25</div><div class="stop-name">Bolt verso hotel — solo ritiro bagagli</div></div>
-      <div class="stop travel"><div class="stop-time">15:25 – 15:55</div><div class="stop-name">Bolt verso aeroporto</div></div>
+      <div class="stop travel"><div class="stop-time">15:25 – 15:55</div><div class="stop-name"><a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Aeroporto%20Francisco%20S%C3%A1%20Carneiro%20Porto" target="_blank" rel="noopener">Bolt verso aeroporto</a></div></div>
       <div class="stop"><div class="stop-time">17:40 – 21:10</div><div class="stop-name">Volo di rientro</div></div>
     </div>
 
